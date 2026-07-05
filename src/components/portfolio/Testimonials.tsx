@@ -2,19 +2,19 @@ import { Reveal } from "./Reveal";
 
 const items = [
   {
-    q: "Aria dresses women the way great architects design cathedrals — with reverence and silence.",
-    a: "Elena Vasari",
-    r: "Editor-in-Chief, Vogue Italia",
+    q: "Àṣọ Lagos dresses Africa the way great architects design cathedrals — with reverence, and with fire.",
+    a: "Chidera Nwosu",
+    r: "Editor-in-Chief, Vogue Africa",
   },
   {
-    q: "The gown arrived like a letter written by hand. I have never felt more entirely myself.",
-    a: "Léa Bonnard",
-    r: "Actress, Palme d'Or 2024",
+    q: "My Aso Oke arrived like a letter from my grandmother. I have never felt more Yoruba, or more modern.",
+    a: "Temilade Adéyemí",
+    r: "Actress, AMVCA Best Lead 2025",
   },
   {
-    q: "A rare, deliberate voice in an industry addicted to noise.",
-    a: "Marcus Rhodes",
-    r: "Curator, Musée des Arts Décoratifs",
+    q: "A rare, deliberate voice — proof that Nigerian couture belongs on every runway from Lagos to Paris.",
+    a: "Marcus Okafor",
+    r: "Curator, Zeitz MOCAA",
   },
 ];
 

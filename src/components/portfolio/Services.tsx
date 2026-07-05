@@ -1,10 +1,10 @@
 import { Reveal } from "./Reveal";
 
 const services = [
-  { n: "01", t: "Bespoke Couture", d: "Private commissions crafted over five to nine fittings in the Paris atelier." },
-  { n: "02", t: "Bridal Ateliers", d: "Made-to-measure gowns for weddings, private ceremonies, and second-day looks." },
-  { n: "03", t: "Runway Direction", d: "Creative direction and full runway production for luxury houses and events." },
-  { n: "04", t: "Editorial Styling", d: "Wardrobe consulting for editorial covers, films, and red-carpet appearances." },
+  { n: "01", t: "Bespoke Agbada & Kaftan", d: "Private commissions for men — Agbada, Senator, Kaftan and Babban Riga — cut over four to seven fittings in Ikoyi." },
+  { n: "02", t: "Bridal & Traditional Attire", d: "Yoruba, Igbo and Hausa wedding ensembles — Iro and Buba, George wrapper, Isi Agu, lace and Aso Oke, styled with gele and coral." },
+  { n: "03", t: "Luxury Ready-to-Wear", d: "Ankara and Adire capsule drops — modern silhouettes rooted in Nigerian textile heritage, shipped worldwide." },
+  { n: "04", t: "Editorial & Runway Direction", d: "Creative direction for Lagos, Arise and Paris fashion weeks, editorial covers and red-carpet moments." },
 ];
 
 export function Services() {
@@ -15,7 +15,7 @@ export function Services() {
           <div className="mb-20 md:mb-28 max-w-3xl">
             <div className="flex items-center gap-3 text-cream/60 mb-6">
               <span className="h-px w-10 bg-[color:var(--gold)]" />
-              <span className="text-[10px] uppercase tracking-[0.4em]">06 — Services</span>
+              <span className="text-[10px] uppercase tracking-[0.4em]">06 — The Atelier</span>
             </div>
             <h2 className="font-display text-[9vw] md:text-[5vw] leading-[0.95]">
               Craft, offered <em className="text-[color:var(--gold)]">by hand</em>.
