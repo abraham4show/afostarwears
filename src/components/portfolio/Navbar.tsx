@@ -6,10 +6,10 @@ const links = [
   { label: "Home", href: "#home" },
   { label: "Collections", href: "#collections" },
   { label: "Gallery", href: "#gallery" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Behind The Scenes", href: "#behind" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "The House", href: "#about" },
+  { label: "Atelier", href: "#services" },
+  { label: "Runway", href: "#behind" },
+  { label: "Press", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -42,7 +42,7 @@ export function Navbar() {
             scrolled ? "text-noir" : "text-cream drop-shadow-[0_1px_10px_rgba(0,0,0,0.4)]"
           }`}
         >
-          Aria&nbsp;·&nbsp;Lenoir
+          Àṣọ&nbsp;·&nbsp;Lagos
         </a>
 
         <nav className="hidden xl:flex items-center gap-9">

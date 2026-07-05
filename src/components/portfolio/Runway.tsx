@@ -44,7 +44,7 @@ export function Runway() {
           transition={{ duration: 1.4, delay: 0.2 }}
           className="font-display text-cream text-[11vw] md:text-[7vw] leading-[0.9] max-w-6xl"
         >
-          The <em className="text-[color:var(--gold)]">runway</em>, in motion.
+          Lagos on the <em className="text-[color:var(--gold)]">runway</em>.
         </motion.h2>
 
         <motion.button

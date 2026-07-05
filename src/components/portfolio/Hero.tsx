@@ -7,7 +7,7 @@ export function Hero() {
     <section id="home" className="relative h-[100svh] w-full overflow-hidden bg-noir">
       <motion.img
         src={hero}
-        alt="Aria Lenoir couture editorial"
+        alt="Àṣọ Lagos couture editorial — Nigerian model in embroidered Agbada"
         width={1600}
         height={1920}
         initial={{ scale: 1.15, opacity: 0 }}
@@ -15,7 +15,7 @@ export function Hero() {
         transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/25 to-black/80" />
 
       <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col justify-between px-6 pt-32 pb-16 md:px-12">
         <motion.div
@@ -25,7 +25,7 @@ export function Hero() {
           className="flex items-center gap-4 text-cream/80"
         >
           <span className="h-px w-10 bg-[color:var(--gold)]" />
-          <span className="text-[10px] uppercase tracking-[0.4em]">Autumn / Winter · MMXXVI</span>
+          <span className="text-[10px] uppercase tracking-[0.4em]">Lagos · Harmattan / MMXXVI</span>
         </motion.div>
 
         <div className="max-w-5xl">
@@ -35,8 +35,8 @@ export function Hero() {
             transition={{ duration: 1.4, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="text-cream font-display italic text-[15vw] leading-[0.85] md:text-[11vw]"
           >
-            Aria
-            <span className="block not-italic tracking-tighter">Lenoir</span>
+            Àṣọ
+            <span className="block not-italic tracking-tighter">Lagos</span>
           </motion.h1>
 
           <motion.p
@@ -45,8 +45,8 @@ export function Hero() {
             transition={{ duration: 1.2, delay: 1.4 }}
             className="mt-8 max-w-md text-cream/70 text-sm md:text-base leading-relaxed"
           >
-            A Parisian couturière shaping quiet, cinematic silhouettes —
-            hand-stitched in noir, cream, and gold since 2014.
+            A house of Nigerian couture — Yoruba, Igbo and Hausa silhouettes
+            reimagined for the global stage. Hand-crafted in Lagos since 2014.
           </motion.p>
 
           <motion.div

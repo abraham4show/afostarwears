@@ -21,22 +21,22 @@ export function Contact() {
             <div className="mt-12 space-y-5 text-sm">
               <div className="flex items-center gap-4 text-cream/80">
                 <MapPin size={16} className="text-[color:var(--gold)]" />
-                14 rue de Sévigné, 75004 Paris
+                27 Bourdillon Road, Ikoyi — Lagos, Nigeria
               </div>
               <div className="flex items-center gap-4 text-cream/80">
                 <Mail size={16} className="text-[color:var(--gold)]" />
-                atelier@arialenoir.com
+                atelier@asolagos.ng
               </div>
               <div className="flex items-center gap-4 text-cream/80">
                 <Phone size={16} className="text-[color:var(--gold)]" />
-                +33 1 42 76 88 04
+                +234 (0) 803 214 8801
               </div>
               <a
                 href="#"
                 className="flex items-center gap-4 text-cream/80 hover:text-[color:var(--gold)] transition-colors"
               >
                 <Instagram size={16} className="text-[color:var(--gold)]" />
-                @arialenoir.atelier
+                @asolagos.atelier
               </a>
             </div>
           </Reveal>
@@ -61,7 +61,7 @@ export function Contact() {
               <iframe
                 title="Atelier location"
                 loading="lazy"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=2.360%2C48.855%2C2.365%2C48.859&layer=mapnik"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=3.435%2C6.445%2C3.455%2C6.460&layer=mapnik"
                 className="h-full w-full grayscale contrast-125 opacity-80"
               />
             </div>

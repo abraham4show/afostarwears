@@ -3,9 +3,9 @@ export function Footer() {
     <footer className="bg-noir text-cream border-t border-cream/10">
       <div className="mx-auto max-w-[1600px] px-6 md:px-12 py-16 grid md:grid-cols-3 gap-12">
         <div>
-          <div className="font-display text-2xl tracking-[0.35em] uppercase">Aria · Lenoir</div>
+          <div className="font-display text-2xl tracking-[0.35em] uppercase">Àṣọ · Lagos</div>
           <p className="mt-4 text-cream/50 text-sm leading-relaxed max-w-xs">
-            Maison de couture. Paris — since MMXIV.
+            House of Nigerian couture. Lagos — since MMXIV.
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export function Footer() {
         <div className="md:text-right">
           <div className="text-[10px] uppercase tracking-[0.3em] text-cream/50 mb-4">Follow</div>
           <div className="flex md:justify-end gap-6 text-sm text-cream/70">
-            {["Instagram", "Vimeo", "Pinterest", "Business of Fashion"].map((s) => (
+            {["Instagram", "TikTok", "Pinterest", "Arise Fashion"].map((s) => (
               <a key={s} href="#" className="hover:text-[color:var(--gold)] transition-colors">
                 {s}
               </a>
@@ -41,8 +41,8 @@ export function Footer() {
 
       <div className="border-t border-cream/10">
         <div className="mx-auto max-w-[1600px] px-6 md:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] uppercase tracking-[0.3em] text-cream/40">
-          <span>© MMXXVI Aria Lenoir Couture</span>
-          <span>Made in Paris · with quiet hands</span>
+          <span>© MMXXVI Àṣọ Lagos — Adérèmi Okonkwo Couture</span>
+          <span>Made in Lagos · by hand, for the world</span>
         </div>
       </div>
     </footer>

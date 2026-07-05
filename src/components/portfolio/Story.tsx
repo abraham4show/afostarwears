@@ -5,15 +5,15 @@ import process from "@/assets/process.jpg";
 const chapters = [
   {
     kicker: "The Designer",
-    title: "Trained in Paris. Shaped by silence.",
-    body: "Aria Lenoir studied haute couture under Madame Éveline Marchand before opening her rue de Sévigné atelier in 2014. Her work has been worn on the steps of the Palais Garnier, the Cannes red carpet, and quiet weddings on the Amalfi coast.",
+    title: "Trained in Lagos. Shaped by three cultures.",
+    body: "Adérèmi Okonkwo studied at the Yaba College of Fine Arts before apprenticing under master tailors in Kano and Onitsha. In 2014 he opened his Ikoyi atelier as a bridge between Yoruba, Igbo and Hausa traditions — dressing brides, presidents and the diaspora that carries Nigeria to the world.",
     img: designer,
     reverse: false,
   },
   {
     kicker: "The Creative Process",
-    title: "Forty hands. One silhouette.",
-    body: "Each piece begins as a single line on tracing paper, then travels through the hands of embroiderers in Mumbai, silk weavers in Lyon, and premières d'atelier in Paris. A single gown may hold nine hundred hours of labor.",
+    title: "Forty hands. One heirloom.",
+    body: "Each piece begins with a single sketch, then travels through weavers of Aso Oke in Ede, embroiderers in Kano, and bead artisans in Owerri. A ceremonial Agbada may hold six hundred hours of hand-work — thread, coral, and gold pressed into cloth built to outlive us.",
     img: process,
     reverse: true,
   },
@@ -56,11 +56,11 @@ export function Story() {
                 <div>
                   <div className="font-display text-4xl text-[color:var(--gold)]">12</div>
                   <div className="text-[10px] uppercase tracking-[0.3em] text-noir/50 mt-2">
-                    Years of couture
+                    Years in Lagos
                   </div>
                 </div>
                 <div>
-                  <div className="font-display text-4xl text-[color:var(--gold)]">148</div>
+                <div className="font-display text-4xl text-[color:var(--gold)]">312</div>
                   <div className="text-[10px] uppercase tracking-[0.3em] text-noir/50 mt-2">
                     Bespoke pieces
                   </div>
@@ -81,13 +81,13 @@ export function Story() {
               <span className="h-px w-10 bg-[color:var(--gold)]" />
             </div>
             <p className="font-display italic text-3xl md:text-6xl leading-[1.1] text-noir max-w-5xl mx-auto">
-              "A garment is not decoration.
+              "Cloth carries memory.
               <span className="block text-[color:var(--gold)] not-italic">
-                It is the architecture of a woman's silence."
+                To wear it is to answer your ancestors."
               </span>
             </p>
             <div className="mt-8 text-[10px] uppercase tracking-[0.4em] text-noir/50">
-              — Aria Lenoir
+              — Adérèmi Okonkwo
             </div>
           </div>
         </Reveal>
