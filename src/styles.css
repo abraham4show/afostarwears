@@ -32,6 +32,10 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+  --color-cream: var(--cream);
+  --color-noir: var(--noir);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -173,15 +177,3 @@
   }
 }
 
-@utility text-gold {
-  color: var(--gold);
-}
-@utility bg-noir {
-  background-color: var(--noir);
-}
-@utility text-noir {
-  color: var(--noir);
-}
-@utility bg-cream {
-  background-color: var(--cream);
-}
