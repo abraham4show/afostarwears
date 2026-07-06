@@ -176,15 +176,3 @@
   }
 }
 
-@utility text-gold {
-  color: var(--gold);
-}
-@utility bg-noir {
-  background-color: var(--noir);
-}
-@utility text-noir {
-  color: var(--noir);
-}
-@utility bg-cream {
-  background-color: var(--cream);
-}
