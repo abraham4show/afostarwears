@@ -3,7 +3,7 @@ import { CheckCircle2, MessageCircle, Home } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { useCart, formatNaira } from "@/lib/cart-store";
 
-const WA_NUMBER = "234912281673";
+const WA_NUMBER = "2349122881673";
 
 export function Success() {
   const { lastOrder, setView } = useCart();
