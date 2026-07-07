@@ -1,103 +1,86 @@
-import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useState } from "react";
-import { Loader2, CheckCircle2, ShieldCheck, X } from "lucide-react";
-import { formatNaira } from "@/lib/cart-store";
+import { useEffect, useRef } from "react";
+
+const PAYSTACK_PUBLIC_KEY = "pk_test_db536641926a1dfc9b24b29a56776ca28ad99415";
+const SCRIPT_SRC = "https://js.paystack.co/v1/inline.js";
+
+declare global {
+  interface Window {
+    PaystackPop?: {
+      setup: (opts: Record<string, unknown>) => { openIframe: () => void };
+    };
+  }
+}
+
+function loadPaystack(): Promise<NonNullable<Window["PaystackPop"]>> {
+  return new Promise((resolve, reject) => {
+    if (typeof window === "undefined") return reject(new Error("no window"));
+    if (window.PaystackPop) return resolve(window.PaystackPop);
+    const existing = document.querySelector<HTMLScriptElement>(
+      `script[src="${SCRIPT_SRC}"]`,
+    );
+    if (existing) {
+      existing.addEventListener("load", () => resolve(window.PaystackPop!));
+      existing.addEventListener("error", () => reject(new Error("script error")));
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = SCRIPT_SRC;
+    s.async = true;
+    s.onload = () => resolve(window.PaystackPop!);
+    s.onerror = () => reject(new Error("script error"));
+    document.body.appendChild(s);
+  });
+}
 
 type Props = {
   open: boolean;
-  amount: number;
+  amount: number; // in Naira
   email: string;
   onClose: () => void;
   onSuccess: (reference: string) => void;
 };
 
 export function PaymentModal({ open, amount, email, onClose, onSuccess }: Props) {
-  const [stage, setStage] = useState<"confirm" | "processing" | "done">("confirm");
+  const launchedRef = useRef(false);
 
   useEffect(() => {
-    if (open) setStage("confirm");
-  }, [open]);
+    if (!open) {
+      launchedRef.current = false;
+      return;
+    }
+    if (launchedRef.current) return;
+    launchedRef.current = true;
 
-  const pay = () => {
-    setStage("processing");
-    // Simulated Paystack processing
-    setTimeout(() => {
-      const ref = "AFS-" + Math.random().toString(36).slice(2, 10).toUpperCase();
-      setStage("done");
-      setTimeout(() => onSuccess(ref), 700);
-    }, 1800);
-  };
+    let cancelled = false;
 
-  return (
-    <AnimatePresence>
-      {open && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
-            onClick={stage === "confirm" ? onClose : undefined}
-          />
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="fixed inset-0 z-[70] flex items-center justify-center p-4 pointer-events-none"
-          >
-            <div className="pointer-events-auto w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-2xl">
-              <div className="bg-[#0BA4DB] text-white px-6 py-4 flex items-center justify-between">
-                <div className="flex items-center gap-2 font-semibold">
-                  <ShieldCheck className="w-5 h-5" />
-                  Paystack Secure Checkout
-                </div>
-                {stage === "confirm" && (
-                  <button onClick={onClose} aria-label="Close">
-                    <X className="w-5 h-5" />
-                  </button>
-                )}
-              </div>
-              <div className="p-6">
-                {stage === "confirm" && (
-                  <>
-                    <div className="text-xs uppercase tracking-widest text-neutral-500">Pay to AFOSTAR WEARS</div>
-                    <div className="mt-1 text-neutral-600 text-sm">{email}</div>
-                    <div className="mt-4 font-display font-bold text-4xl">{formatNaira(amount)}</div>
-                    <div className="mt-6 border rounded-2xl p-4 space-y-3 text-sm">
-                      <div className="flex justify-between"><span className="text-neutral-500">Method</span><span>Card · **** 4242</span></div>
-                      <div className="flex justify-between"><span className="text-neutral-500">Currency</span><span>NGN</span></div>
-                      <div className="flex justify-between"><span className="text-neutral-500">Fee</span><span>Included</span></div>
-                    </div>
-                    <button
-                      onClick={pay}
-                      className="mt-6 w-full bg-[#0BA4DB] hover:bg-[#0994c6] text-white font-medium py-4 rounded-full transition"
-                    >
-                      Pay {formatNaira(amount)}
-                    </button>
-                    <p className="mt-3 text-[11px] text-neutral-400 text-center">
-                      Simulated Paystack demo — no real charge is made.
-                    </p>
-                  </>
-                )}
-                {stage === "processing" && (
-                  <div className="py-10 flex flex-col items-center text-center">
-                    <Loader2 className="w-10 h-10 animate-spin text-[#0BA4DB]" />
-                    <div className="mt-4 font-medium">Processing your payment…</div>
-                    <div className="text-sm text-neutral-500 mt-1">Please don't close this window.</div>
-                  </div>
-                )}
-                {stage === "done" && (
-                  <div className="py-10 flex flex-col items-center text-center">
-                    <CheckCircle2 className="w-12 h-12 text-emerald-500" />
-                    <div className="mt-3 font-display font-bold text-2xl">Payment Successful</div>
-                    <div className="text-sm text-neutral-500 mt-1">Redirecting to your order…</div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
+    loadPaystack()
+      .then((PaystackPop) => {
+        if (cancelled) return;
+        const handler = PaystackPop.setup({
+          key: PAYSTACK_PUBLIC_KEY,
+          email: email || "customer@afostarwears.ng",
+          amount: Math.round(amount * 100), // kobo
+          currency: "NGN",
+          ref: "AFS-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8).toUpperCase(),
+          channels: ["card", "bank", "bank_transfer", "ussd", "qr", "mobile_money"],
+          callback: (response: { reference: string }) => {
+            onSuccess(response.reference);
+          },
+          onClose: () => {
+            onClose();
+          },
+        });
+        handler.openIframe();
+      })
+      .catch(() => {
+        alert("Unable to load Paystack. Please check your connection and try again.");
+        onClose();
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [open, amount, email, onClose, onSuccess]);
+
+  return null;
 }
