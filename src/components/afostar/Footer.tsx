@@ -1,4 +1,4 @@
-import { Instagram, Music2, MapPin, Phone } from "lucide-react";
+import { Instagram, Music2, MapPin, Phone,  } from "lucide-react";
 
 export function Footer() {
   return (
@@ -13,7 +13,9 @@ export function Footer() {
         <div>
           <div className="text-xs uppercase tracking-widest text-neutral-500 mb-3">Visit</div>
           <p className="inline-flex items-start gap-2 text-sm text-neutral-300"><MapPin className="w-4 h-4 mt-0.5" /> Oshodi Market, Lagos — Nigeria</p>
-          <p className="mt-2 inline-flex items-center gap-2 text-sm text-neutral-300"><Phone className="w-4 h-4" /> +234 912 281 673</p>
+          <p className="mt-2 inline-flex items-center gap-2 text-sm text-neutral-300"><Phone className="w-4 h-4" /> +234 912 2881 673</p>
+          
+          
         </div>
         <div>
           <div className="text-xs uppercase tracking-widest text-neutral-500 mb-3">Follow</div>

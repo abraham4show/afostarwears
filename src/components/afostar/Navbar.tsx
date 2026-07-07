@@ -1,6 +1,8 @@
 import { ShoppingBag, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart-store";
+import logo from "@/assets/afostarlogo.jpeg";
+
 
 export function Navbar() {
   const { items, open, setView } = useCart();
@@ -17,13 +19,12 @@ export function Navbar() {
       className={`sticky top-0 z-40 transition-all ${scrolled ? "bg-white/90 backdrop-blur border-b border-black/10" : "bg-transparent"}`}
     >
       <div className="max-w-7xl mx-auto px-5 md:px-8 h-16 md:h-20 flex items-center justify-between">
-        <button
-          onClick={() => setView("shop")}
-          className="flex items-center gap-2 font-display font-bold tracking-tight text-lg md:text-xl"
-        >
-          <span className="w-2 h-2 rounded-full bg-black" />
-          AFOSTAR<span className="text-neutral-400 font-normal">·WEARS</span>
-        </button>
+       <button
+  onClick={() => setView("shop")}
+  className="flex items-center gap-2 font-display font-bold tracking-tight text-lg md:text-xl"
+>
+  <img src={logo} alt="Afostar Wears" className="h-16 w-auto" />
+</button>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
           <a href="#shop" className="hover:opacity-60">Shop</a>
           <a href="#categories" className="hover:opacity-60">Categories</a>
@@ -44,9 +45,9 @@ export function Navbar() {
               </span>
             )}
           </button>
-          <button className="md:hidden p-2" aria-label="Menu">
+          {/* <button className="md:hidden p-2" aria-label="Menu">
             <Menu className="w-5 h-5" />
-          </button>
+          </button> */}
         </div>
       </div>
     </header>
