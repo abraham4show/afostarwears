@@ -3,10 +3,13 @@ import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
 import { PRODUCTS, CATEGORIES } from "@/lib/products";
 import { useCart, formatNaira } from "@/lib/cart-store";
+import { QuickView } from "./QuickView";
+import type { Product } from "@/lib/cart-store";
 
 export function Products() {
   const [category, setCategory] = useState<(typeof CATEGORIES)[number]>("All");
   const add = useCart((s) => s.add);
+  const [quick, setQuick] = useState<Product | null>(null);
 
   const filtered = useMemo(
     () => (category === "All" ? PRODUCTS : PRODUCTS.filter((p) => p.category === category)),
@@ -65,12 +68,21 @@ export function Products() {
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                   />
+                  <button
+                    type="button"
+                    onClick={() => setQuick(p)}
+                    aria-label={`Quick view ${p.name}`}
+                    className="absolute inset-0 w-full h-full"
+                  />
                   <span className="absolute top-3 left-3 bg-white/90 backdrop-blur text-[10px] uppercase tracking-widest px-2 py-1 rounded-full">
                     Pack of {p.packSize}
                   </span>
                   <button
-                    onClick={() => add(p)}
-                    className="absolute bottom-3 right-3 bg-black text-white rounded-full w-11 h-11 flex items-center justify-center opacity-0 group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0 transition"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      add(p);
+                    }}
+                    className="absolute bottom-3 right-3 z-10 bg-black text-white rounded-full w-11 h-11 flex items-center justify-center opacity-0 group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0 transition"
                     aria-label={`Add ${p.name}`}
                   >
                     <Plus className="w-5 h-5" />
@@ -94,6 +106,7 @@ export function Products() {
           </AnimatePresence>
         </motion.div>
       </div>
+      <QuickView product={quick} onClose={() => setQuick(null)} />
     </section>
   );
 }
