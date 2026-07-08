@@ -7,6 +7,8 @@ export type Product = {
   pricePerPack: number;
   packSize: number;
   image: string;
+  gallery?: string[];
+  packSizes?: string[];
 };
 
 export type CartItem = {
