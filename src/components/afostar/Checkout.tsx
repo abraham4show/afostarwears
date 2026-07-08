@@ -4,6 +4,8 @@ import { z } from "zod";
 import { ArrowLeft, Lock } from "lucide-react";
 import { useCart, formatNaira } from "@/lib/cart-store";
 import { PaymentModal } from "./PaymentModal";
+import { useAuth } from "@/lib/auth-store";
+import { useOrders } from "@/lib/orders-store";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Enter your full name").max(80),
@@ -25,6 +27,8 @@ const SHIPPING: Record<string, { label: string; note: string; fee: number }> = {
 
 export function Checkout() {
   const { items, setView, clear, setLastOrder } = useCart();
+  const { user } = useAuth();
+  const addOrder = useOrders((s) => s.addOrder);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -65,6 +69,16 @@ export function Checkout() {
       items: [...items],
     };
     setLastOrder(order);
+    // Persist to order history for the dashboard
+    addOrder({
+      reference,
+      userId: user?.id ?? null,
+      total,
+      name: form.name,
+      phone: form.phone,
+      address: `${form.address}, ${form.city}`,
+      items: [...items],
+    });
     clear();
     setPayOpen(false);
     setView("success");
