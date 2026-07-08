@@ -61,17 +61,18 @@ export function Products() {
                 transition={{ duration: 0.35 }}
                 className="group relative bg-neutral-50 rounded-2xl overflow-hidden"
               >
-                <button
-                  type="button"
-                  onClick={() => setQuick(p)}
-                  className="relative aspect-[4/5] overflow-hidden block w-full text-left"
-                  aria-label={`Quick view ${p.name}`}
-                >
+                <div className="relative aspect-[4/5] overflow-hidden">
                   <img
                     src={p.image}
                     alt={p.name}
                     loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setQuick(p)}
+                    aria-label={`Quick view ${p.name}`}
+                    className="absolute inset-0 w-full h-full"
                   />
                   <span className="absolute top-3 left-3 bg-white/90 backdrop-blur text-[10px] uppercase tracking-widest px-2 py-1 rounded-full">
                     Pack of {p.packSize}
@@ -81,12 +82,12 @@ export function Products() {
                       e.stopPropagation();
                       add(p);
                     }}
-                    className="absolute bottom-3 right-3 bg-black text-white rounded-full w-11 h-11 flex items-center justify-center opacity-0 group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0 transition"
+                    className="absolute bottom-3 right-3 z-10 bg-black text-white rounded-full w-11 h-11 flex items-center justify-center opacity-0 group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0 transition"
                     aria-label={`Add ${p.name}`}
                   >
                     <Plus className="w-5 h-5" />
                   </button>
-                </button>
+                </div>
                 <div className="p-4">
                   <div className="text-[11px] uppercase tracking-widest text-neutral-500">{p.category}</div>
                   <div className="mt-1 font-medium leading-tight">{p.name}</div>
