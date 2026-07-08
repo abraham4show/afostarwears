@@ -6,6 +6,7 @@ import { CartDrawer } from "@/components/afostar/CartDrawer";
 import { Checkout } from "@/components/afostar/Checkout";
 import { Success } from "@/components/afostar/Success";
 import { Footer } from "@/components/afostar/Footer";
+import { AuthModal } from "@/components/afostar/AuthModal";
 import { useCart } from "@/lib/cart-store";
 
 export const Route = createFileRoute("/")({
@@ -62,6 +63,7 @@ function Index() {
       {view === "success" && <Success />}
       <Footer />
       <CartDrawer />
+      <AuthModal />
     </main>
   );
 }
