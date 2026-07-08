@@ -14,7 +14,30 @@ export const CATEGORIES = [
 const img = (seed: string) =>
   `https://images.unsplash.com/${seed}?auto=format&fit=crop&w=800&q=70`;
 
-export const PRODUCTS: Product[] = [
+const DEFAULT_PACK_SIZES = ["S", "M", "L", "XL", "XXL"];
+
+// Extra crops give us a small gallery per product. We reuse the main image
+// with different Unsplash query params to keep bundles small.
+const galleryOf = (seed: string): string[] => [
+  `https://images.unsplash.com/${seed}?auto=format&fit=crop&w=1200&q=80`,
+  `https://images.unsplash.com/${seed}?auto=format&fit=crop&w=1200&q=80&sat=-50`,
+  `https://images.unsplash.com/${seed}?auto=format&fit=crop&w=1200&q=80&flip=h`,
+  `https://images.unsplash.com/${seed}?auto=format&fit=crop&w=1200&q=80&blur=1`,
+  `https://images.unsplash.com/${seed}?auto=format&fit=crop&w=1200&q=80&fit=facearea`,
+];
+
+const withGallery = (p: Omit<Product, "gallery" | "packSizes"> & { seed: string }): Product => ({
+  id: p.id,
+  name: p.name,
+  category: p.category,
+  pricePerPack: p.pricePerPack,
+  packSize: p.packSize,
+  image: p.image,
+  gallery: galleryOf(p.seed),
+  packSizes: DEFAULT_PACK_SIZES,
+});
+
+const RAW: Array<Omit<Product, "gallery" | "packSizes"> & { seed: string }> = [
   {
     id: "jog-01",
     name: "Signature Cargo Joggers",
@@ -22,6 +45,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 45000,
     packSize: 6,
     image: img("photo-1552902865-b72c031ac5ea"),
+    seed: "photo-1552902865-b72c031ac5ea",
   },
   {
     id: "jog-02",
@@ -30,6 +54,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 39000,
     packSize: 6,
     image: img("photo-1552783860-4e3c95c8b7f2"),
+    seed: "photo-1552783860-4e3c95c8b7f2",
   },
   {
     id: "snk-01",
@@ -38,6 +63,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 82000,
     packSize: 4,
     image: img("photo-1542291026-7eec264c27ff"),
+    seed: "photo-1542291026-7eec264c27ff",
   },
   {
     id: "snk-02",
@@ -46,6 +72,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 96000,
     packSize: 4,
     image: img("photo-1600185365483-26d7a4cc7519"),
+    seed: "photo-1600185365483-26d7a4cc7519",
   },
   {
     id: "rnk-01",
@@ -54,6 +81,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 28000,
     packSize: 10,
     image: img("photo-1521572163474-6864f9cf17ab"),
+    seed: "photo-1521572163474-6864f9cf17ab",
   },
   {
     id: "rnk-02",
@@ -62,6 +90,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 32000,
     packSize: 10,
     image: img("photo-1583743814966-8936f5b7be1a"),
+    seed: "photo-1583743814966-8936f5b7be1a",
   },
   {
     id: "jns-01",
@@ -70,6 +99,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 68000,
     packSize: 6,
     image: img("photo-1542272604-787c3835535d"),
+    seed: "photo-1542272604-787c3835535d",
   },
   {
     id: "jns-02",
@@ -78,6 +108,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 72000,
     packSize: 6,
     image: img("photo-1541099649105-f69ad21f3246"),
+    seed: "photo-1541099649105-f69ad21f3246",
   },
   {
     id: "vtg-01",
@@ -86,6 +117,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 88000,
     packSize: 4,
     image: img("photo-1544022613-e87ca75a784a"),
+    seed: "photo-1544022613-e87ca75a784a",
   },
   {
     id: "vtg-02",
@@ -94,6 +126,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 54000,
     packSize: 6,
     image: img("photo-1591047139829-d91aecb6caea"),
+    seed: "photo-1591047139829-d91aecb6caea",
   },
   {
     id: "col-01",
@@ -102,6 +135,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 48000,
     packSize: 8,
     image: img("photo-1618354691373-d851c5c3a990"),
+    seed: "photo-1618354691373-d851c5c3a990",
   },
   {
     id: "col-02",
@@ -110,6 +144,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 56000,
     packSize: 8,
     image: img("photo-1602810318383-e386cc2a3ccf"),
+    seed: "photo-1602810318383-e386cc2a3ccf",
   },
   {
     id: "srt-01",
@@ -118,6 +153,7 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 34000,
     packSize: 8,
     image: img("photo-1591195853828-11db59a44f6b"),
+    seed: "photo-1591195853828-11db59a44f6b",
   },
   {
     id: "srt-02",
@@ -126,5 +162,8 @@ export const PRODUCTS: Product[] = [
     pricePerPack: 30000,
     packSize: 10,
     image: img("photo-1571945153237-4929e783af4a"),
+    seed: "photo-1571945153237-4929e783af4a",
   },
 ];
+
+export const PRODUCTS: Product[] = RAW.map(withGallery);
