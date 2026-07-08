@@ -3,10 +3,13 @@ import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
 import { PRODUCTS, CATEGORIES } from "@/lib/products";
 import { useCart, formatNaira } from "@/lib/cart-store";
+import { QuickView } from "./QuickView";
+import type { Product } from "@/lib/cart-store";
 
 export function Products() {
   const [category, setCategory] = useState<(typeof CATEGORIES)[number]>("All");
   const add = useCart((s) => s.add);
+  const [quick, setQuick] = useState<Product | null>(null);
 
   const filtered = useMemo(
     () => (category === "All" ? PRODUCTS : PRODUCTS.filter((p) => p.category === category)),
@@ -58,7 +61,12 @@ export function Products() {
                 transition={{ duration: 0.35 }}
                 className="group relative bg-neutral-50 rounded-2xl overflow-hidden"
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setQuick(p)}
+                  className="relative aspect-[4/5] overflow-hidden block w-full text-left"
+                  aria-label={`Quick view ${p.name}`}
+                >
                   <img
                     src={p.image}
                     alt={p.name}
@@ -69,13 +77,16 @@ export function Products() {
                     Pack of {p.packSize}
                   </span>
                   <button
-                    onClick={() => add(p)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      add(p);
+                    }}
                     className="absolute bottom-3 right-3 bg-black text-white rounded-full w-11 h-11 flex items-center justify-center opacity-0 group-hover:opacity-100 md:translate-y-2 md:group-hover:translate-y-0 transition"
                     aria-label={`Add ${p.name}`}
                   >
                     <Plus className="w-5 h-5" />
                   </button>
-                </div>
+                </button>
                 <div className="p-4">
                   <div className="text-[11px] uppercase tracking-widest text-neutral-500">{p.category}</div>
                   <div className="mt-1 font-medium leading-tight">{p.name}</div>
@@ -94,6 +105,7 @@ export function Products() {
           </AnimatePresence>
         </motion.div>
       </div>
+      <QuickView product={quick} onClose={() => setQuick(null)} />
     </section>
   );
 }
