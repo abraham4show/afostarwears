@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
@@ -32,6 +33,75 @@ export function Products() {
       );
     });
   }, [category]);
+=======
+import { useMemo, useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Plus } from "lucide-react";
+import { CATEGORIES } from "@/lib/products";
+import { useCart, formatNaira } from "@/lib/cart-store";
+import { QuickView } from "./QuickView";
+import type { Product } from "@/lib/cart-store";
+import { getProducts } from "@/services/contentful";
+
+export function Products() {
+  const [category, setCategory] = useState<(typeof CATEGORIES)[number]>("All");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const add = useCart((s) => s.add);
+  const [quick, setQuick] = useState<Product | null>(null);
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+        console.log("✅ Products loaded from Contentful:", data);
+      } catch (err) {
+        console.error("❌ Failed to load products:", err);
+        setError("Could not load products. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadProducts();
+  }, []);
+
+  const filtered = useMemo(
+    () => (category === "All" ? products : products.filter((p) => p.category === category)),
+    [products, category],
+  );
+
+  if (loading) {
+    return (
+      <section id="shop" className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 text-center py-12">
+          <p className="text-neutral-600">Loading products…</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="shop" className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 text-center py-12">
+          <p className="text-red-600">{error}</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <section id="shop" className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 text-center py-12">
+          <p className="text-neutral-600">No products available at the moment.</p>
+        </div>
+      </section>
+    );
+  }
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
 
   return (
     <section id="shop" className="py-16 md:py-24 bg-white">

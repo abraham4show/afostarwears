@@ -1,6 +1,9 @@
 import { useEffect, useRef } from "react";
 
-const PAYSTACK_PUBLIC_KEY = "pk_test_db536641926a1dfc9b24b29a56776ca28ad99415";
+// 1. Read the Netlify environment variable, or fall back to your test key locally
+const PAYSTACK_PUBLIC_KEY = 
+  import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+
 const SCRIPT_SRC = "https://js.paystack.co/v1/inline.js";
 
 declare global {

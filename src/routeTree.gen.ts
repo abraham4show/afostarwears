@@ -13,7 +13,10 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ReturnsRouteImport } from './routes/returns'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+<<<<<<< HEAD
 import { Route as AdminRouteImport } from './routes/admin'
+=======
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
 import { Route as IndexRouteImport } from './routes/index'
 
 const TermsRoute = TermsRouteImport.update({
@@ -36,11 +39,14 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+<<<<<<< HEAD
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+=======
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,7 +55,10 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/admin': typeof AdminRoute
+=======
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   '/dashboard': typeof DashboardRoute
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
@@ -57,7 +66,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/admin': typeof AdminRoute
+=======
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   '/dashboard': typeof DashboardRoute
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
@@ -66,7 +78,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+<<<<<<< HEAD
   '/admin': typeof AdminRoute
+=======
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   '/dashboard': typeof DashboardRoute
   '/privacy': typeof PrivacyRoute
   '/returns': typeof ReturnsRoute
@@ -74,6 +89,7 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
+<<<<<<< HEAD
   fullPaths: '/' | '/admin' | '/dashboard' | '/privacy' | '/returns' | '/terms'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/admin' | '/dashboard' | '/privacy' | '/returns' | '/terms'
@@ -85,11 +101,20 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/returns'
     | '/terms'
+=======
+  fullPaths: '/' | '/dashboard' | '/privacy' | '/returns' | '/terms'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/dashboard' | '/privacy' | '/returns' | '/terms'
+  id: '__root__' | '/' | '/dashboard' | '/privacy' | '/returns' | '/terms'
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+<<<<<<< HEAD
   AdminRoute: typeof AdminRoute
+=======
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   DashboardRoute: typeof DashboardRoute
   PrivacyRoute: typeof PrivacyRoute
   ReturnsRoute: typeof ReturnsRoute
@@ -126,6 +151,7 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+<<<<<<< HEAD
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -133,6 +159,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+=======
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
     '/': {
       id: '/'
       path: '/'
@@ -145,7 +173,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+<<<<<<< HEAD
   AdminRoute: AdminRoute,
+=======
+>>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   DashboardRoute: DashboardRoute,
   PrivacyRoute: PrivacyRoute,
   ReturnsRoute: ReturnsRoute,
