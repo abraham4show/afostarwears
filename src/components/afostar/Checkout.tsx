@@ -1,20 +1,13 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { z } from "zod";
-<<<<<<< HEAD
 import { ArrowLeft, Lock, Truck } from "lucide-react";
-=======
-import { ArrowLeft, Lock } from "lucide-react";
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
 import { useCart, formatNaira } from "@/lib/cart-store";
 import { PaymentModal } from "./PaymentModal";
 import { useAuth } from "@/lib/auth-store";
 import { useOrders } from "@/lib/orders-store";
 
-<<<<<<< HEAD
 // 1. Removed shipping from the validation schema
-=======
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
 const schema = z.object({
   name: z.string().trim().min(2, "Enter your full name").max(80),
   phone: z
@@ -24,25 +17,12 @@ const schema = z.object({
   email: z.string().trim().email("Enter a valid email"),
   address: z.string().trim().min(8, "Enter your delivery address").max(200),
   city: z.string().trim().min(2).max(60),
-<<<<<<< HEAD
 });
 
-=======
-  shipping: z.enum(["gig", "pickup", "sameday"]),
-});
-
-const SHIPPING: Record<string, { label: string; note: string; fee: number }> = {
-  gig: { label: "GIG Logistics (Nationwide)", note: "2–4 business days", fee: 4500 },
-  sameday: { label: "Same-day Lagos delivery", note: "Within Lagos only", fee: 6000 },
-  pickup: { label: "Pickup at Oshodi Market", note: "Ready in 24 hours", fee: 0 },
-};
-
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
 export function Checkout() {
   const { items, setView, clear, setLastOrder } = useCart();
   const { user } = useAuth();
   const addOrder = useOrders((s) => s.addOrder);
-<<<<<<< HEAD
   
   // 2. Removed shipping selection from initial state
   const [form, setForm] = useState({
@@ -51,27 +31,14 @@ export function Checkout() {
     email: user?.email || "",
     address: "",
     city: "Lagos",
-=======
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
-    city: "Lagos",
-    shipping: "gig" as "gig" | "sameday" | "pickup",
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [payOpen, setPayOpen] = useState(false);
 
   const subtotal = items.reduce((s, i) => s + i.product.pricePerPack * i.quantity, 0);
-<<<<<<< HEAD
   
   // 3. Shipping is always 0 since they pay their dispatcher directly on arrival
   const shippingFee = 0;
-=======
-  const shippingFee = SHIPPING[form.shipping].fee;
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   const total = subtotal + shippingFee;
 
   const submit = (e: React.FormEvent) => {
@@ -89,11 +56,7 @@ export function Checkout() {
     setPayOpen(true);
   };
 
-<<<<<<< HEAD
   const onSuccess = async (reference: string) => {
-=======
-  const onSuccess = (reference: string) => {
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
     const order = {
       reference,
       total,
@@ -103,13 +66,8 @@ export function Checkout() {
       items: [...items],
     };
     setLastOrder(order);
-<<<<<<< HEAD
     
     await addOrder({
-=======
-    // Persist to order history for the dashboard
-    addOrder({
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
       reference,
       userId: user?.id ?? null,
       total,
@@ -118,10 +76,7 @@ export function Checkout() {
       address: `${form.address}, ${form.city}`,
       items: [...items],
     });
-<<<<<<< HEAD
     
-=======
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
     clear();
     setPayOpen(false);
     setView("success");
@@ -195,7 +150,6 @@ export function Checkout() {
             {errors.address && <span className="text-xs text-red-600 mt-1 block">{errors.address}</span>}
           </label>
 
-<<<<<<< HEAD
           {/* 4. REPLACED OPTION SELECTOR WITH AN INFORMATION CARD */}
           <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-5">
             <div className="flex gap-3">
@@ -210,36 +164,6 @@ export function Checkout() {
                   To ensure you get the fairest and most accurate rate, we do not charge for delivery on this website. Once your order is processed, we will book a dispatcher (or dispatch service) to your exact address. You will pay the delivery fee directly to the rider when they arrive.
                 </p>
               </div>
-=======
-          <div>
-            <div className="text-[11px] uppercase tracking-widest text-neutral-500 mb-3">Shipping method</div>
-            <div className="space-y-2">
-              {(Object.keys(SHIPPING) as Array<keyof typeof SHIPPING>).map((k) => (
-                <label
-                  key={k}
-                  className={`flex items-center justify-between border rounded-xl px-4 py-3 cursor-pointer transition ${
-                    form.shipping === k ? "border-black bg-neutral-50" : "border-black/15"
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="radio"
-                      name="shipping"
-                      className="accent-black"
-                      checked={form.shipping === k}
-                      onChange={() => setForm({ ...form, shipping: k as any })}
-                    />
-                    <div>
-                      <div className="font-medium text-sm">{SHIPPING[k].label}</div>
-                      <div className="text-xs text-neutral-500">{SHIPPING[k].note}</div>
-                    </div>
-                  </div>
-                  <div className="font-medium text-sm">
-                    {SHIPPING[k].fee === 0 ? "Free" : formatNaira(SHIPPING[k].fee)}
-                  </div>
-                </label>
-              ))}
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
             </div>
           </div>
 
@@ -270,7 +194,6 @@ export function Checkout() {
             ))}
           </ul>
           <div className="border-t pt-4 space-y-2 text-sm">
-<<<<<<< HEAD
             <div className="flex justify-between">
               <span className="text-neutral-500">Subtotal</span>
               <span>{formatNaira(subtotal)}</span>
@@ -284,12 +207,6 @@ export function Checkout() {
             <div className="flex justify-between font-display font-bold text-lg pt-2">
               <span>Total</span>
               <span>{formatNaira(total)}</span>
-=======
-            <div className="flex justify-between"><span className="text-neutral-500">Subtotal</span><span>{formatNaira(subtotal)}</span></div>
-            <div className="flex justify-between"><span className="text-neutral-500">Shipping</span><span>{shippingFee ? formatNaira(shippingFee) : "Free"}</span></div>
-            <div className="flex justify-between font-display font-bold text-lg pt-2">
-              <span>Total</span><span>{formatNaira(total)}</span>
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
             </div>
           </div>
         </aside>
