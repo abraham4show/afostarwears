@@ -1,8 +1,12 @@
 import { useEffect, useRef } from "react";
 
-// 1. Read the Netlify environment variable, or fall back to your test key locally
-const PAYSTACK_PUBLIC_KEY = 
-  import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+// Read the Vite environment variable
+const PAYSTACK_PUBLIC_KEY = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
+
+// Log during development to see exactly what your bundler is feeding the app
+if (import.meta.env.DEV) {
+  console.log("Paystack Key loaded:", PAYSTACK_PUBLIC_KEY);
+}
 
 const SCRIPT_SRC = "https://js.paystack.co/v1/inline.js";
 
