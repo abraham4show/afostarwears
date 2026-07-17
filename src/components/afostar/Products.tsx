@@ -1,39 +1,3 @@
-<<<<<<< HEAD
-import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Plus } from "lucide-react";
-import { PRODUCTS, CATEGORIES } from "@/lib/products";
-import { useCart, formatNaira } from "@/lib/cart-store";
-import { QuickView } from "./QuickView";
-import type { Product } from "@/lib/cart-store";
-
-export function Products() {
-  const [category, setCategory] = useState<(typeof CATEGORIES)[number]>("All");
-  const add = useCart((s) => s.add);
-  const [quick, setQuick] = useState<Product | null>(null);
-
-  // Robust, typo-tolerant, and case-insensitive matching logic
-  const filtered = useMemo(() => {
-    if (category === "All") {
-      return PRODUCTS;
-    }
-    
-    return PRODUCTS.filter((p) => {
-      if (!p.category) return false;
-      
-      const productCat = p.category.trim().toLowerCase();
-      const targetCat = category.trim().toLowerCase();
-
-      // Matches exact, sub-matches, and compensates for "vintge" vs "vintage"
-      return (
-        productCat === targetCat ||
-        productCat.includes(targetCat) ||
-        targetCat.includes(productCat) ||
-        (targetCat === "vintage" && productCat.includes("vintg")) // Explicit fallback helper for vintage typos
-      );
-    });
-  }, [category]);
-=======
 import { useMemo, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Plus } from "lucide-react";
@@ -67,10 +31,26 @@ export function Products() {
     loadProducts();
   }, []);
 
-  const filtered = useMemo(
-    () => (category === "All" ? products : products.filter((p) => p.category === category)),
-    [products, category],
-  );
+  // Robust, typo-tolerant, and case-insensitive matching logic against Contentful array
+  const filtered = useMemo(() => {
+    if (category === "All") {
+      return products;
+    }
+    
+    return products.filter((p) => {
+      if (!p.category) return false;
+      
+      const productCat = p.category.trim().toLowerCase();
+      const targetCat = category.trim().toLowerCase();
+
+      return (
+        productCat === targetCat ||
+        productCat.includes(targetCat) ||
+        targetCat.includes(productCat) ||
+        (targetCat === "vintage" && productCat.includes("vintg"))
+      );
+    });
+  }, [products, category]);
 
   if (loading) {
     return (
@@ -101,7 +81,6 @@ export function Products() {
       </section>
     );
   }
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
 
   return (
     <section id="shop" className="py-16 md:py-24 bg-white">
@@ -197,3 +176,6 @@ export function Products() {
     </section>
   );
 }
+
+
+

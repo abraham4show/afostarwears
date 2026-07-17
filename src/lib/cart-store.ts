@@ -1,8 +1,5 @@
 import { create } from "zustand";
-<<<<<<< HEAD
 import { useAuth } from "./auth-store";
-=======
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
 
 export type Product = {
   id: string;
@@ -42,18 +39,13 @@ type CartState = {
   setLastOrder: (order: CartState["lastOrder"]) => void;
 };
 
-<<<<<<< HEAD
 export const useCart = create<CartState>((set, get) => ({
-=======
-export const useCart = create<CartState>((set) => ({
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   items: [],
   isOpen: false,
   view: "shop",
   lastOrder: null,
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
-<<<<<<< HEAD
   
   setView: (view) => {
     // 🛡️ Guard Checkout: Verify if customer has an account and is logged in
@@ -73,9 +65,6 @@ export const useCart = create<CartState>((set) => ({
     set({ view });
   },
   
-=======
-  setView: (view) => set({ view }),
->>>>>>> 11f2069fcc43f46632a8f54260f077e6d52388cc
   add: (product) =>
     set((state) => {
       const existing = state.items.find((i) => i.product.id === product.id);
@@ -103,3 +92,5 @@ export const useCart = create<CartState>((set) => ({
 
 export const formatNaira = (n: number) =>
   "₦" + n.toLocaleString("en-NG", { maximumFractionDigits: 0 });
+
+
